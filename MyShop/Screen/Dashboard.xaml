@@ -1,0 +1,132 @@
+﻿<Window x:Class="MyShop.Screen.Dashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyShop.Screen"
+        mc:Ignorable="d"
+                WindowStyle="None"
+ResizeMode="NoResize"
+        Title="Dashboard" Height="800" Width="1300"
+        Loaded="Window_Loaded"
+        >
+    <Window.Background>
+        <ImageBrush ImageSource="../Images/Login/background.jpg"/>
+    </Window.Background>
+
+    <Grid>
+
+        <!--Action Bar-->
+        <materialDesign:ColorZone
+            MouseDown="ColorZone_MouseDown"
+            Mode="Dark"
+            Padding="10"
+            materialDesign:ShadowAssist.ShadowDepth="Depth2">
+            <Grid>
+                <!--Navigation-->
+               
+                <!--Tiêu đề-->
+                <TextBlock
+                    Name="txtTitle"
+                    Text="Shop Mobile"
+                    FontSize="15"
+                    Margin="190,0,0,0"
+                    FontFamily="Sitka Subheading"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+                <Button 
+                    Click="btnCommands_Click"
+                    Tag="btnClose"
+                    Height="20" Width="20"
+                    BorderBrush="OrangeRed"
+                    Opacity="0.8"
+                    Background="OrangeRed"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                    <materialDesign:PackIcon
+                        Kind="Close" Height="15" Width="15"/>
+                </Button>
+                
+    
+            </Grid>
+        </materialDesign:ColorZone>
+      
+        <Grid Margin="0,40,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <!-- Sidebar/Menu -->
+                <ColumnDefinition Width="*"/>
+                <!-- Content -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Sidebar/Menu -->
+            <Border Grid.Column="0" Background="#1E90FF" >
+
+                <ListBox>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}">
+                                            <ContentPresenter />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="#1C86EE" />
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="#1C86EE" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBoxItem >
+                        <StackPanel Orientation="Horizontal" Margin="10,10,0,10"  >
+                            <Image Source="../Images/HomePage/Home.png" Width="25" Height="25" Margin="5,0,10,0"/>
+                            <TextBlock Text="Trang chủ" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem  IsSelected="True"  MouseLeftButtonUp="go_sell" >
+                        <StackPanel Orientation="Horizontal" Margin="10,10,0,10"  >
+                            <Image Source="../Images/HomePage/icon_sell.png" Width="25" Height="25" Margin="5,0,10,0"/>
+                            <TextBlock Text="Bán hàng" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem MouseLeftButtonUp="go_products">
+                        <StackPanel Orientation="Horizontal" Margin="10,10,0,10" >
+                            <Image Source="../Images/HomePage/icon_product.png" Width="25" Height="25" Margin="5,0,10,0"/>
+                            <TextBlock Text="Sản phẩm" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal" Margin="10,10,0,10" >
+                            <Image Source="../Images/HomePage/thongke.png" Width="25" Height="25" Margin="5,0,10,0"/>
+                            <TextBlock Text="Thống kê" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+            </Border>
+
+
+            <!-- Content -->
+            <Border Grid.Column="1" Background="White">
+                <DockPanel>
+                    <Frame x:Name="_mainFrame"
+                   NavigationUIVisibility="Hidden"/>
+                </DockPanel>
+            </Border>
+        </Grid>
+        <!--Màn hình hiển thị nội dung-->
+        <!--<DockPanel Margin="8,50,8,8">
+            <Frame x:Name="_mainFrame"
+                   NavigationUIVisibility="Hidden"/>
+        </DockPanel>-->
+
+    </Grid>
+</Window>
