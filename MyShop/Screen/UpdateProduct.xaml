@@ -1,0 +1,57 @@
+﻿<Window x:Class="MyShop.Screen.UpdateProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyShop.Screen"
+        mc:Ignorable="d"
+        Title="UpdateProduct" Height="700" Width="800" Loaded="Window_Loaded">
+    <Grid Margin="0,0,0,6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="2" Height="50" TextAlignment="Center" Foreground="#FFFC1313" FontWeight="Bold" FontSize="25"  >Cập nhật sản phẩm</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="1" Height="20" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top">Loại sản phẩm:</TextBlock>
+        <ComboBox Grid.Column="1" Grid.Row="1" Height="30" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,20" Style="{Binding MaterialDesign}" BorderThickness="1" BorderBrush="MediumPurple" Name="categoryCombobox" SelectionChanged="categoryCombobox_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Padding="5" Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Button x:Name="chooseImageButton" Background="Transparent" Click="chooseImageButton_Click" Width="280" Height="260" Grid.Row="1" Grid.Column="2" Grid.RowSpan="4" Margin="10,10,10,20">
+            <Image x:Name="avatar" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Image}" />
+        </Button>
+
+        <TextBlock Grid.Column="1" Grid.Row="2" Height="20" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top">Tên sản phẩm:</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="2" Height="30" Width="300" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,20" BorderThickness="1" BorderBrush="Purple" Padding="5" Text="{Binding Name}" x:Name="NameBox" />
+
+        <TextBlock Grid.Column="1" Grid.Row="3" Height="20" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top">Số lượng:</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="3" Height="30" Width="300" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,20" BorderThickness="1" BorderBrush="Purple" Padding="5" Text="{Binding Amount}" x:Name="AmountBox"/>
+        
+        <TextBlock Grid.Column="1" Grid.Row="4" Height="20" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top">Đơn giá:</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="4" Height="30" Width="300" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,20" BorderThickness="1" BorderBrush="Purple" Padding="5" Text="{Binding Price}" x:Name="PriceBox"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="5" Height="20" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top">Discount:</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="5" Height="30" Width="300" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,20" BorderThickness="1" BorderBrush="Purple" Padding="5" Text="{Binding Discount}" x:Name="DiscountBox"/>
+
+        <StackPanel Height="40" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,42,0,54">
+            <Button x:Name="cancelButton" Click="cancelButton_Click" Content="Cancel" Width="120" Margin="0 0 20 0"/>
+            <Button x:Name="updateButton" Click="updateButton_Click" Content="Update" Width="120" Margin="20 0 0 0"/>
+        </StackPanel>
+    </Grid>
+</Window>

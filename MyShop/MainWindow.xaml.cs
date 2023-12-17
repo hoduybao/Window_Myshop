@@ -1,18 +1,7 @@
-﻿using MyShop.Screen;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MyShop.Model;
+using MyShop.Screen;
+using MyShop.Services;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MyShop
 {
@@ -26,21 +15,34 @@ namespace MyShop
             InitializeComponent();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            Dashboard dashboard = new Dashboard();
-            dashboard.Left = Application.Current.MainWindow.Left;
-            dashboard.Top = Application.Current.MainWindow.Top;
-            dashboard.Show();
-            this.Close();
+            string user = editUsername.Text;
+            string pass = editPassword.Password;
 
+            Account account = new Account();
+            account.Username = user;
+            account.Password = pass;
+
+            bool check = await AuthService.Login(account);
+
+            if (check)
+            {
+                Dashboard dashboard = new Dashboard();
+                dashboard.Left = Application.Current.MainWindow.Left;
+                dashboard.Top = Application.Current.MainWindow.Top;
+                dashboard.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Tài khoản hoặc mật khẩu không chính xác!");
+            }
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-     
-    
     }
 }

@@ -23,31 +23,31 @@
                         <StackPanel>
                             <Label   Margin="137,20,0,0" FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" >Tên khách hàng</Label>
                             <TextBox x:Name="nameCustomer" Width="220" Height="25"  FontSize="13" Padding="5,2,0,0" 
-                        FontFamily="Sitka Subheading"  BorderThickness="1,1,1,1"
-                />
+                        FontFamily="Sitka Subheading"  BorderThickness="1,1,1,1" />
 
                             <Label Margin="137,8,0,0" FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14">Số điện thoại</Label>
                             <TextBox Margin="0,0,0,25" x:Name="phoneCustomer" Width="220" Height="25"  FontSize="13" Padding="5,2,0,0"
                         FontFamily="Sitka Subheading"  BorderThickness="1,1,1,1" />
                         </StackPanel>
+                    
                     <Border Padding="0,5,0,0" Background="#1C86EE" BorderThickness="0,3,0,3" BorderBrush="LightGray">
                         <TextBlock Height="25" TextAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="14" >Thông tin hóa đơn</TextBlock>
                     </Border>
+                    
                     <Border Margin="2,3,2,0" BorderBrush="Black" BorderThickness="1">
-
                         <ScrollViewer Height="300" VerticalScrollBarVisibility="Auto">
 
-                            <DataGrid x:Name="dgHoaDon" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+                            <DataGrid x:Name="dgHoaDon" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionChanged="dgHoaDon_SelectionChanged">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="STT" Width="60" Binding="{Binding STT}" />
-                                    <DataGridTextColumn Header="Tên sản phẩm" Width="180" Binding="{Binding TenSanPham}" />
-                                    <DataGridTextColumn Header="Đơn giá" Width="80" Binding="{Binding DonGia}" />
+                                    <DataGridTextColumn Header="Tên sản phẩm" Width="160" Binding="{Binding Product.Name}" />
+                                    <DataGridTextColumn Header="Đơn giá" Width="90" Binding="{Binding Price}" />
                                     <DataGridTemplateColumn Header="Số lượng">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
                                                     <Button Width="20" Foreground="Black" Padding="0" Background="LightGray" Height="20" Click="DecreaseQuantity_Click">-</Button>
-                                                    <TextBlock Margin="5,0,5,0" Text="{Binding SoLuong}" />
+                                                    <TextBlock Margin="5,0,5,0" Text="{Binding Amount}" />
                                                     <Button Width="20" Padding="0" Foreground="Black" Background="LightGray" Height="20" Content="+" Click="IncreaseQuantity_Click"/>
                                                 </StackPanel>
                                             </DataTemplate>
@@ -64,17 +64,16 @@
                             <Label FontFamily="Sitka Subheading" HorizontalContentAlignment="Right" FontWeight="Normal" FontSize="14">Tiền khách trả:</Label>
                             <Label FontFamily="Sitka Subheading" HorizontalContentAlignment="Right" FontWeight="Normal" FontSize="14">Tiền thừa:</Label>
                         </StackPanel>
+                        
                         <StackPanel HorizontalAlignment="Right">
-                            <TextBlock Text="25,000 đ" x:Name="totalOrder" Padding="2" FontSize="14" Foreground="YellowGreen" FontWeight="Bold"
-                        />
-                            <TextBox Padding="3,0,0,0" Margin="0,5,0,0" x:Name="moneyOfCustomer" Width="115" Height="25"  FontSize="13"
-                          BorderThickness="1,1,1,1" />
-                            <TextBox Padding="3,0,0,0" IsReadOnly="True"  Margin="0,5,0,0" x:Name="leftMoney" Width="115" Height="25"  FontSize="13"
-                         BorderThickness="1,1,1,1" />
+                            <TextBlock Text="{Binding Total, Converter={StaticResource moneyConverter}}" x:Name="totalOrder" Padding="2" FontSize="14" Foreground="YellowGreen" FontWeight="Bold"/>
+                            <TextBox Padding="3,0,0,0" Margin="0,5,0,0" x:Name="moneyOfCustomer" LostFocus="MoneyOfCustomer_LostFocus" Width="115" Height="25"  FontSize="13" BorderThickness="1,1,1,1" />
+                            <TextBox Padding="3,0,0,0" IsReadOnly="True"  Margin="0,5,0,0" x:Name="leftMoney" Width="115" Height="25"  FontSize="13" BorderThickness="1,1,1,1" />
                         </StackPanel>
+                        
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Margin="0,0,10,0" Background="Green">Thanh toán</Button>
+                        <Button Name="btnBillPayment" Click ="btnBillPayment_Click" Margin="0,0,10,0" Background="Green">Thanh toán</Button>
                         <Button Background="OrangeRed">Hủy đơn</Button>
 
                     </StackPanel>
@@ -88,14 +87,16 @@
                     <StackPanel Orientation="Horizontal" Margin="30,10,0,0">
                         <StackPanel >
                             <Label  FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" >Tên sản phẩm</Label>
-                            <TextBox x:Name="searchNameProduct" Width="200" Height="25"  FontSize="13" Padding="5,2,2,0"
-                         BorderThickness="1,1,1,1"
-                />
+                            <TextBox x:Name="searchNameProduct" Width="200" Height="25"  FontSize="13" Padding="5,2,2,0" BorderThickness="1,1,1,1"/>
                         </StackPanel>
                         <StackPanel Margin="30,0,30,0">
                             <Label  FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" >Loại sản phẩm</Label>
                             <ComboBox Name="comboBoxTypeProduct" Padding="0,3,7,0" Width="120" Height="25" BorderThickness="1,1,1,1"  SelectionChanged="ComboBox_SelectionChanged" FontSize="13">
-                              
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" Height="20"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </StackPanel>
                         <StackPanel>
@@ -152,25 +153,47 @@
                     <TextBlock Height="25" TextAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="14" >Danh sách sản phẩm</TextBlock>
                 </Border>
                 <Border BorderThickness="0,0,3,0" BorderBrush="LightGray">
-                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="productsComboBox" Width="570" Height="440" VerticalAlignment="Top" SelectionChanged="studentsComboBox_SelectionChanged">
+                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="productsComboBox" Width="570" Height="440" VerticalAlignment="Top" SelectionChanged="productsComboBox_SelectionChanged">
+                        <ListView.Resources>
+                            <ContextMenu x:Key="TenCuaContextMenu">                                
+                                <MenuItem Header="add" Click="addMenuItem_Click">
+                                    <MenuItem.Icon>
+                                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="Images/Button/add.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Delete" Click="deleteMenuItem_Click">
+                                    <MenuItem.Icon>
+                                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="Images/Button/delete.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListView.Resources>
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}" >
+                                <Setter Property="ContextMenu" Value="{StaticResource TenCuaContextMenu}" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel />
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
+                        
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderThickness="1,1,1,1" Padding="5,0,5,0" CornerRadius="5" BorderBrush="Gray" Width="165" Height="200">
                                     <StackPanel Orientation="Vertical" >
-                                        <Image  Source="{Binding Avatar}" RenderOptions.BitmapScalingMode="HighQuality" Margin="0, 0, 5, 0" Width="100" Height="100"/>
+                                        <Image  Source="{Binding Image}" RenderOptions.BitmapScalingMode="HighQuality" Margin="0, 0, 5, 0" Width="100" Height="100"/>
 
-                                        <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,5,0,5" Text="{Binding TenSanPham}" >
+                                        <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,5,0,5" Text="{Binding Name}" >
                                         </TextBlock>
-                                        <TextBlock   Margin="0,0,0,5"  HorizontalAlignment="Center" Foreground="YellowGreen" FontSize="14"  Text="{Binding DonGia,Converter={StaticResource moneyConverter}}">
+                                        <TextBlock   Margin="0,0,0,5"  HorizontalAlignment="Center" Foreground="YellowGreen" FontSize="14"  Text="{Binding Price,Converter={StaticResource moneyConverter}}">
 
                                         </TextBlock>
                                         <TextBlock HorizontalAlignment="Right" >
-                            <Run Text="Số lượng" Foreground="Blue" /> - <Run Text="{Binding SoLuong}"/>
+                            <Run Text="Số lượng" Foreground="Blue" /> - <Run Text="{Binding Amount}"/>
                                         </TextBlock>
                                     </StackPanel>
                                 </Border>

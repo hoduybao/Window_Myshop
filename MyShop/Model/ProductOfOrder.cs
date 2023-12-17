@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyShop.Model
+﻿namespace MyShop.Model
 {
     public class ProductOfOrder
     {
         public int STT { get; set; }
-        public string TenSanPham { get; set; }
-        public decimal DonGia { get; set; }
-        public int SoLuong { get; set; }
-        public decimal TongTien => DonGia * SoLuong;
+        public int Id { get; set; } = 0;
+        public Product Product { get; set; }
+        public decimal Price { get; set; }
+        public int Amount { get; set; }
+        public double TongTien => (double)Price * Amount;
+        //public double TongTien { get; set; }
+
+
     }
 }

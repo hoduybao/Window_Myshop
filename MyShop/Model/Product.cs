@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyShop.Model
+﻿namespace MyShop.Model
 {
     public class Product
     {
-        public string Avatar { get; set; }
-        public string TenSanPham { get; set; }
-        public decimal DonGia { get; set; }
-        public int SoLuong { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Image { get; set; }
+        public double Price { get; set; }
+        public ProductType Category { get; set; }
+        public int Amount { get; set; }
+        public double Discount { get; set; }
+        public double Profit { get; set; }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }
