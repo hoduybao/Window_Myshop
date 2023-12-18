@@ -150,6 +150,7 @@
     </ApplicationDefinition>
     <Compile Include="Configs\Constant.cs" />
     <Compile Include="Configs\RestSharpClient.cs" />
+    <Compile Include="Helpers\percentConverter.cs" />
     <Compile Include="Helpers\ReflectionExtension.cs" />
     <Compile Include="Helpers\Respon1Data.cs" />
     <Compile Include="Helpers\Respon1ProductType.cs" />

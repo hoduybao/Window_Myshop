@@ -12,21 +12,22 @@
 
     <Page.Resources>
         <super:numberToMoneyConverter x:Key="moneyConverter"/>
+        <!--<super:percentConverter x:Key="percentConverter"/>-->
     </Page.Resources>
     <Border BorderThickness="3,3,3,3" BorderBrush="LightGray">
-           
-            <StackPanel   Background="White">
-                <Border Padding="0,5,0,0" Background="#1C86EE" BorderThickness="0,0,0,3" BorderBrush="LightGray">
-                    <TextBlock Height="25" TextAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="14" >Bộ lọc sản phẩm</TextBlock>
-                </Border>
-                <Border BorderThickness="0,0,0,0" BorderBrush="LightGray">
+        <StackPanel   Background="White">
+            <Border Padding="0,5,0,0" Background="#1C86EE" BorderThickness="0,0,0,3" BorderBrush="LightGray">
+                <TextBlock Height="25" TextAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="14" >Bộ lọc sản phẩm</TextBlock>
+            </Border>
+
+            <Border BorderThickness="0,0,0,0" BorderBrush="LightGray">
                 <StackPanel Margin="25,20,25,0">
                     <StackPanel Orientation="Horizontal" >
                         <StackPanel >
                             <Label  FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" >Tên sản phẩm</Label>
-                            <TextBox x:Name="searchNameProduct" Width="200" Height="25"  FontSize="13" Padding="5,2,2,0"
-                         BorderThickness="1,1,1,1"/>
+                            <TextBox x:Name="searchNameProduct" Width="200" Height="25"  FontSize="13" Padding="5,2,2,0" BorderThickness="1,1,1,1"/>
                         </StackPanel>
+
                         <StackPanel Margin="10,0,0,0">
                             <Label  FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" >Loại sản phẩm</Label>
                             <ComboBox Name="comboBoxTypeProduct" Padding="0,3,7,0" Width="120" Height="25" BorderThickness="1,1,1,1"  SelectionChanged="ComboBox_SelectionChanged" FontSize="13">
@@ -40,91 +41,128 @@
 
                         <StackPanel Margin="10,0,5,0">
                             <Label FontFamily="Sitka Subheading" FontWeight="SemiBold" VerticalAlignment="Center">Min</Label>
-                            <TextBox Padding="3,0,0,0" Text="{Binding ElementName=minValue,Converter={StaticResource moneyConverter}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,2,0,0" x:Name="minCost" Width="150" Height="25"  FontSize="13"
-                         BorderThickness="1,1,1,1" />
-
-                            <Slider Margin="0,5,0,0" SmallChange="500000"     IsSnapToTickEnabled="True" 
- LargeChange="500000" TickFrequency="500000" Minimum="0" Name="minValue" Maximum="50000000" Value="0"  Width="150"/>
+                            <TextBox Padding="3,0,0,0" Text="{Binding ElementName=minValue,Converter={StaticResource moneyConverter}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,2,0,0" x:Name="minCost" Width="150" Height="25"  FontSize="13" BorderThickness="1,1,1,1" />
+                            <Slider Margin="0,5,0,0" SmallChange="500000" IsSnapToTickEnabled="True" LargeChange="500000" TickFrequency="500000" Minimum="0" Name="minValue" Maximum="50000000" Value="0"  Width="150"/>
 
                         </StackPanel>
+
                         <Label FontFamily="Sitka Subheading"  FontWeight="Bold" VerticalAlignment="Center" FontSize="14">-</Label>
 
                         <StackPanel Margin="5,0,10,0">
                             <Label FontFamily="Sitka Subheading" FontWeight="SemiBold" VerticalAlignment="Center">Max</Label>
-                            <TextBox Padding="3,0,0,0"   Text="{Binding ElementName=maxValue,Converter={StaticResource moneyConverter}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Margin="0,2,0,0" x:Name="maxCost"  Width="150" Height="25"  FontSize="13"
-                         BorderThickness="1,1,1,1" />
-
-                            <Slider Margin="0,5,0,0"  SmallChange="500000"     IsSnapToTickEnabled="True" 
- LargeChange="500000" TickFrequency="500000" Width="150" Minimum="0" Maximum="50000000" Value="50000000" Name="maxValue"/>
-
+                            <TextBox Padding="3,0,0,0"   Text="{Binding ElementName=maxValue,Converter={StaticResource moneyConverter}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Margin="0,2,0,0" x:Name="maxCost"  Width="150" Height="25"  FontSize="13" BorderThickness="1,1,1,1" />
+                            <Slider Margin="0,5,0,0"  SmallChange="500000"     IsSnapToTickEnabled="True" LargeChange="500000" TickFrequency="500000" Width="150" Minimum="0" Maximum="50000000" Value="50000000" Name="maxValue"/>
                         </StackPanel>
+
                         <StackPanel Margin="0,0,10,0">
                             <Label  FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" >Sắp xếp</Label>
-                            <ComboBox Name="sortCost" Padding="0,3,7,0" Width="110" Height="25" BorderThickness="1,1,1,1"  SelectionChanged="ComboBox_SelectionChangedSort" FontSize="13">
-
-                            </ComboBox>
+                            <ComboBox Name="sortCost" Padding="0,3,7,0" Width="110" Height="25" BorderThickness="1,1,1,1"  SelectionChanged="ComboBox_SelectionChangedSort" FontSize="13"></ComboBox>
                         </StackPanel>
-                        <Button 
-                            Margin="0,5,0,0"
-                Width="90" Content="Áp dụng"
-                FontWeight="Bold"
-                Foreground="White"
-                FontSize="15"
-                Background="ForestGreen"
-                FontFamily="Sitka Subheading"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Click="btnApplyFilter_Click"
-                x:Name="btnApplyFilter"/>
+                        <Button Margin="0,5,0,0" Width="90" Content="Áp dụng" FontWeight="Bold" Foreground="White" FontSize="15" Background="ForestGreen" FontFamily="Sitka Subheading" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnApplyFilter_Click" x:Name="btnApplyFilter"/>
                     </StackPanel>
-                   
+
                 </StackPanel>
 
-                </Border>
-                
-                <Border Padding="0,5,0,0" Margin="0,30,0,0" Background="#1C86EE" BorderThickness="0,3,0,3" BorderBrush="LightGray">
-                    <TextBlock Height="25" TextAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="14" >Danh sách sản phẩm</TextBlock>
-                </Border>
-            <StackPanel Orientation="Horizontal"
-                        Margin="20,10,0,0">
-                <Button  
-                Width="90" Content="Import"
-                FontWeight="Bold"
-                Foreground="White"
-                FontSize="15"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Background="ForestGreen"
-                FontFamily="Sitka Subheading"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Click="btnImportProduct_Click"
-                Name="btnImportProduct">
-                </Button>
+            </Border>
+
+            <Border Padding="0,5,0,0" Margin="0,30,0,0" Background="#1C86EE" BorderThickness="0,3,0,3" BorderBrush="LightGray">
+                <TextBlock Height="25" TextAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="14" >Danh sách sản phẩm</TextBlock>
+            </Border>
+
+            <StackPanel Orientation="Horizontal" Margin="20,10,0,0">
+                <Button  Width="90" Content="Import" FontWeight="Bold" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="ForestGreen" FontFamily="Sitka Subheading" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnImportProduct_Click" Name="btnImportProduct"></Button>
             </StackPanel>
-                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="productsComboBox" Margin="10" Height="435"  VerticalAlignment="Top" SelectionChanged="productsComboBox_SelectionChanged">
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderThickness="1,1,1,1" Padding="5,0,5,0" CornerRadius="5" BorderBrush="Gray" Width="195" Height="200">
-                                    <StackPanel Orientation="Vertical" >
-                                        <Image  Source="{Binding Image}" RenderOptions.BitmapScalingMode="HighQuality" Margin="0, 0, 5, 0" Width="100" Height="100"/>
 
-                                        <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,5,0,5" Text="{Binding Name}" >
-                                        </TextBlock>
-                                        <TextBlock   Margin="0,0,0,5"  HorizontalAlignment="Center" Foreground="YellowGreen" FontSize="14"  Text="{Binding Price,Converter={StaticResource moneyConverter}}">
+            <!--<ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="productsComboBox" Margin="10" Height="435"  VerticalAlignment="Top" SelectionChanged="productsComboBox_SelectionChanged">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1,1,1,1" Padding="5,0,5,0" CornerRadius="5" BorderBrush="Gray" Width="195" Height="200">
+                            <StackPanel Orientation="Vertical" >
+                                <Image  Source="{Binding Image}" RenderOptions.BitmapScalingMode="HighQuality" Margin="0, 10, 5, 0" Width="100" Height="100"/>
+                                <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,5,0,5" Text="{Binding Name}" > </TextBlock>
+                               <TextBlock   Margin="0,0,0,5"  HorizontalAlignment="Center" Foreground="YellowGreen" FontSize="14"  Text="{Binding Price,Converter={StaticResource moneyConverter}}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Right" > <Run Text="Số lượng" Foreground="Blue" /> - <Run Text="{Binding Amount}"/></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
 
+            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="productsComboBox" Margin="10" Height="435"  VerticalAlignment="Top" SelectionChanged="productsComboBox_SelectionChanged">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1,1,1,1" Padding="5,0,5,0" CornerRadius="5" BorderBrush="Gray" Width="195" Height="200">
+                            <StackPanel Orientation="Vertical">
+                                <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                    <Image  Margin ="35,10,0,0" Grid.Column ="0" Source="{Binding Image}" RenderOptions.BitmapScalingMode="HighQuality" Width="90" Height="90"/>
+                                    <!--<Border Grid.Column ="1" Margin ="0,-50,0,0" BorderBrush="Red" BorderThickness="1" CornerRadius="50" Width="35" Height="35">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment ="Center" Grid.Column ="1" Foreground="Red" FontSize="12"><Run Text="{Binding Discount, StringFormat='-{0}%'}" /></TextBlock>
+                                    </Border>-->
+                                    <Border Name="DiscountBorder" Grid.Column="1" Margin="0,-50,0,0" BorderBrush="Red" BorderThickness="1" CornerRadius="50" Width="35" Height="35">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" FontSize="12">
+        <Run Text="{Binding Discount, StringFormat='-{0}%'}" />
                                         </TextBlock>
-                                        <TextBlock HorizontalAlignment="Right" >
-                            <Run Text="Số lượng" Foreground="Blue" /> - <Run Text="{Binding Amount}"/>
-                                        </TextBlock>
-                                    </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Style.Triggers>
+                                                    <!-- Khi Discount là 0, ẩn Border -->
+                                                    <DataTrigger Binding="{Binding Discount}" Value="0">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                    </Border>
+                                </Grid>                                                              
+                                <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,5,0,5" Text="{Binding Name}" />
+                                <TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="YellowGreen" FontSize="14" Text="{Binding NewPrice, Converter={StaticResource moneyConverter}}" />
+                                <!--<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="14" Text="{Binding Price, Converter={StaticResource moneyConverter}}">
+                                    <TextBlock.TextDecorations>
+                                        <TextDecorationCollection>
+                                            <TextDecoration Location="Strikethrough" PenThicknessUnit="Pixel"  />
+                                        </TextDecorationCollection>
+                                    </TextBlock.TextDecorations>
+                                </TextBlock>-->
+                                <TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="14" Text="{Binding Price, Converter={StaticResource moneyConverter}}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <!-- Khi Discount là 0, ẩn TextBlock -->
+                                                <DataTrigger Binding="{Binding Discount}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                    <TextBlock.TextDecorations>
+                                        <TextDecorationCollection>
+                                            <TextDecoration Location="Strikethrough" PenThicknessUnit="Pixel"  />
+                                        </TextDecorationCollection>
+                                    </TextBlock.TextDecorations>
+                                </TextBlock>
+                                <TextBlock HorizontalAlignment="Center"> <Run Text="Số lượng" Foreground="Blue" /> - <Run Text="{Binding Amount}" /></TextBlock>                               
+                                 </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            
+            
             <StackPanel Orientation="Horizontal" Margin="20,10,0,0">
                 <Button Grid.Column="1" Grid.Row="2"
                 Width="90" Content="Thêm"
@@ -154,7 +192,7 @@
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Click="btnUpdateProduct_Click"
                 Name="btnUpdateProduct">
-                    
+
                 </Button>
                 <Button Grid.Column="1" Grid.Row="2"
                 Width="90" Content="Xóa"
@@ -186,8 +224,7 @@
                 Name="btnListTypeProduct">
                 </Button>
             </StackPanel>
-          
-        </StackPanel>
 
+        </StackPanel>
     </Border>
 </Page>

@@ -7,6 +7,7 @@
         public Product Product { get; set; }
         public decimal Price { get; set; }
         public int Amount { get; set; }
+
         public double TongTien => (double)Price * Amount;
         //public double TongTien { get; set; }
 

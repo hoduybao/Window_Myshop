@@ -1,4 +1,16 @@
-﻿namespace MyShop.Model
+﻿using System.ComponentModel;
+
+public class ObservableObject : INotifyPropertyChanged
+{
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
+
+namespace MyShop.Model
 {
     public class Product
     {
@@ -11,6 +23,7 @@
         public double Discount { get; set; }
         public double Profit { get; set; }
 
+        public double NewPrice => (double)Price * (1 - Discount / 100);
         public object Clone()
         {
             return MemberwiseClone();
