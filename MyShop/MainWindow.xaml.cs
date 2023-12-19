@@ -1,6 +1,7 @@
 ﻿using MyShop.Model;
 using MyShop.Screen;
 using MyShop.Services;
+using System.Configuration;
 using System.Windows;
 
 namespace MyShop
@@ -17,12 +18,20 @@ namespace MyShop
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            string user = editUsername.Text;
-            string pass = editPassword.Password;
+            string username = editUsername.Text;
+            string password = editPassword.Password;
 
+            if (rememberMe.IsChecked == true)
+            {
+                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings["Username"].Value = username;
+                config.AppSettings.Settings["Password"].Value = password;
+                config.Save(ConfigurationSaveMode.Minimal);
+                ConfigurationManager.RefreshSection("appSettings");
+            }
             Account account = new Account();
-            account.Username = user;
-            account.Password = pass;
+            account.Username = username;
+            account.Password = password;
 
             bool check = await AuthService.Login(account);
 
@@ -43,6 +52,12 @@ namespace MyShop
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Windows_Loaded(object sender, RoutedEventArgs e)
+        {
+            editUsername.Text = ConfigurationManager.AppSettings["Username"];
+            editPassword.Password = ConfigurationManager.AppSettings["Password"];
         }
     }
 }

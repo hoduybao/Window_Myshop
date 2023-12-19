@@ -34,6 +34,7 @@ namespace MyShop.Screen
 
             // Đặt IsSelected cho ComboBoxItem "Lựa chọn 1"
             itemSortToSelect.IsSelected = true;
+
             LoadProductList();
         }
         ObservableCollection<ProductType> _productsType;
@@ -147,11 +148,11 @@ namespace MyShop.Screen
             // Sắp xếp theo giá tăng dần hoặc giảm dần
             if (sortType == "Tăng dần")
             {
-                productList.Sort((p1, p2) => p1.Price.CompareTo(p2.Price));
+                productList.Sort((p1, p2) => p1.NewPrice.CompareTo(p2.NewPrice));
             }
             else if (sortType == "Giảm dần")
             {
-                productList.Sort((p1, p2) => p2.Price.CompareTo(p1.Price));
+                productList.Sort((p1, p2) => p2.NewPrice.CompareTo(p1.NewPrice));
             }
         }
 
@@ -177,6 +178,11 @@ namespace MyShop.Screen
         {
             // Lấy ID của sản phẩm được chọn
             var product = (Product)productsComboBox.SelectedItem;
+            if (product == null)
+            {
+                MessageBox.Show("Vui lòng chọn sản phẩm muốn xóa");
+                return;
+            }
             int productId = product.Id;
 
             string token = "";
@@ -202,6 +208,11 @@ namespace MyShop.Screen
         private void btnUpdateProduct_Click(object sender, RoutedEventArgs e)
         {
             var product = (Product)productsComboBox.SelectedItem;
+            if (product == null)
+            {
+                MessageBox.Show("Vui lòng chọn sản phẩm muốn sửa");
+                return;
+            }
             var newproduct = new Product()
             {
                 Id = product.Id,

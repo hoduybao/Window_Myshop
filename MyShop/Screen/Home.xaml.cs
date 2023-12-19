@@ -203,11 +203,11 @@ namespace MyShop.Screen
             // Sắp xếp theo giá tăng dần hoặc giảm dần
             if (sortType == "Tăng dần")
             {
-                productList.Sort((p1, p2) => p1.Price.CompareTo(p2.Price));
+                productList.Sort((p1, p2) => p1.NewPrice.CompareTo(p2.NewPrice));
             }
             else if (sortType == "Giảm dần")
             {
-                productList.Sort((p1, p2) => p2.Price.CompareTo(p1.Price));
+                productList.Sort((p1, p2) => p2.NewPrice.CompareTo(p1.NewPrice));
             }
         }
 
@@ -237,7 +237,7 @@ namespace MyShop.Screen
                     STT = productList.Count + 1,
                     Id = selectedProduct.Id,
                     Product = product,
-                    Price = (decimal)selectedProduct.Price,
+                    Price = (decimal)selectedProduct.Price * (decimal)(1 - selectedProduct.Discount / 100),
                     Amount = 1, // Số lượng mặc định là 1
                                 //TongTien = selectedProduct.Price, // Tổng tiền ban đầu bằng giá của sản phẩm
                 };

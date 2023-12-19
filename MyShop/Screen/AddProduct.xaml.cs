@@ -58,7 +58,13 @@ namespace MyShop.Screen
             string ProductName = NameBox.Text;
             double productPrice = double.Parse(PriceBox.Text);
             int productAmount = int.Parse(AmountBox.Text);
-            double productDiscount = double.Parse(DiscountBox.Text);
+            //double productDiscount = double.Parse(DiscountBox.Text);
+            if (!double.TryParse(DiscountBox.Text, out double productDiscount) || productDiscount < 0 || productDiscount > 100)
+            {
+                MessageBox.Show("Giá trị Discount không hợp lệ. Vui lòng nhập giá trị từ 0 đến 100.");
+                // Đổi màu chữ trong TextBox DiscountBox thành đỏ để báo lỗi
+                return;
+            }
 
             ProductType category = new ProductType
             {
@@ -85,17 +91,6 @@ namespace MyShop.Screen
             Product result = await ProductService.AddProduct(newProduct, token);
             // _products.Add(result);
             _listProduct.UpdateProductList(await ProductService.GetProductList());
-
-            //bool check = await ProductService.AddProduct(newProduct, token);
-            //if (check == true)
-            //{
-            //    MessageBox.Show("Thêm sản phẩm thành công!");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Thêm sản phẩm thất bại!");
-            //}
-
             this.Close();
         }
 
