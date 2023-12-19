@@ -53,6 +53,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.8.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.NetCore3.0.9.8\lib\net40\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.8.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.NetCore3.0.9.8\lib\net40\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.1.2.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.1.2\lib\net462\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -98,6 +104,7 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -159,13 +166,17 @@
     <Compile Include="Helpers\Response.cs" />
     <Compile Include="Helpers\indexConverter.cs" />
     <Compile Include="Helpers\numberToMoneyConverter.cs" />
+    <Compile Include="Helpers\ResponseStatistic.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\OrderRequest.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductOfOrder.cs" />
+    <Compile Include="Model\ProductSold.cs" />
     <Compile Include="Model\ProductType.cs" />
+    <Compile Include="Model\RevenueAndProfit.cs" />
+    <Compile Include="Model\Statistic.cs" />
     <Compile Include="Screen\AddProduct.xaml.cs">
       <DependentUpon>AddProduct.xaml</DependentUpon>
     </Compile>
@@ -181,6 +192,9 @@
     <Compile Include="Screen\ListProduct.xaml.cs">
       <DependentUpon>ListProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screen\StatisticPage.xaml.cs">
+      <DependentUpon>StatisticPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screen\ProductTypePage.xaml.cs">
       <DependentUpon>ProductTypePage.xaml</DependentUpon>
     </Compile>
@@ -194,6 +208,7 @@
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductTypeService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\StatisticService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -223,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screen\ListProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screen\StatisticPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

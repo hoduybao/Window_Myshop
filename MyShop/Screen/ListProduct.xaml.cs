@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Navigation;
 
 namespace MyShop.Screen
@@ -117,6 +118,11 @@ namespace MyShop.Screen
 
         private void productsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //new
+            // Reset page when selection changes
+            _currentPage = 0;
+            UpdatePagination();
+            //
             if (productsComboBox.SelectedItem == null) return;
             Product product = productsComboBox.SelectedItem as Product;
 
@@ -241,6 +247,32 @@ namespace MyShop.Screen
             var page = new ProductTypePage();
             NavigationService.Navigate(page);
         }
+
+        // Phân trang
+        private int _itemsPerPage = 10;
+        private int _currentPage = 0;
+
+        private void UpdatePagination()
+        {
+            CollectionViewSource.GetDefaultView(_products).Refresh();
+        }
+
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            _currentPage++;
+            UpdatePagination();
+        }
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentPage > 0)
+            {
+                _currentPage--;
+                UpdatePagination();
+            }
+        }
+
 
     }
 }

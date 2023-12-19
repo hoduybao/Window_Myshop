@@ -104,7 +104,13 @@ ResizeMode="NoResize"
                             <TextBlock Text="Sản phẩm" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
                         </StackPanel>
                     </ListBoxItem>
-                    <ListBoxItem>
+                    <!--<ListBoxItem Selected="ListBoxItem_Selected">
+                        <StackPanel Orientation="Horizontal" Margin="10,10,0,10" >
+                            <Image Source="../Images/HomePage/thongke.png" Width="25" Height="25" Margin="5,0,10,0"/>
+                            <TextBlock Text="Thống kê" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </ListBoxItem>-->
+                    <ListBoxItem MouseLeftButtonUp="go_Statistic">
                         <StackPanel Orientation="Horizontal" Margin="10,10,0,10" >
                             <Image Source="../Images/HomePage/thongke.png" Width="25" Height="25" Margin="5,0,10,0"/>
                             <TextBlock Text="Thống kê" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
