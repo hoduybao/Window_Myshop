@@ -80,5 +80,11 @@ namespace MyShop.Screen
             _mainFrame.Navigate(new Home());
 
         }
+
+        private void go_order(object sender, MouseButtonEventArgs e)
+        {
+            _mainFrame.Navigate(new ListOrder());
+
+        }
     }
 }
