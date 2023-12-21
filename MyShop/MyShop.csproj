@@ -189,6 +189,9 @@
     <Compile Include="Screen\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screen\ListOrder.xaml.cs">
+      <DependentUpon>ListOrder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screen\ListProduct.xaml.cs">
       <DependentUpon>ListProduct.xaml</DependentUpon>
     </Compile>
@@ -234,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screen\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screen\ListOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -366,6 +373,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Button\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HomePage\icon_order.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

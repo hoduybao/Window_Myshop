@@ -1,8 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-
-namespace MyShop.Screen
+﻿namespace MyShop.Screen
 {
     /// <summary>
     /// Interaction logic for Dashboard.xaml
@@ -74,6 +70,12 @@ namespace MyShop.Screen
         private void go_Statistic(object sender, MouseButtonEventArgs e)
         {
             _mainFrame.Navigate(new StatisticPage());
+        }
+
+        private void go_order(object sender, MouseButtonEventArgs e)
+        {
+            _mainFrame.Navigate(new ListOrder());
+
         }
     }
 }
