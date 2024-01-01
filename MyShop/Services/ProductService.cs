@@ -31,6 +31,61 @@ namespace MyShop.Services
             }
         }
 
+        public static async Task<ProductByPage> GetProductListByPage(int numberPage, int size, string accessToken)
+        {
+            var request = new RestRequest("/product/getByPage?page=" + numberPage + "&size=" + size + "&sortBy=price");
+            request.AddHeader("Authorization", $"Bearer {accessToken}");
+            var response = await _client.ExecuteGetAsync(request);
+            //var jsonResponse = JsonConvert.DeserializeObject<ResponseData<List<Product>>>(response.Content);
+
+
+            if (response.IsSuccessful)
+            {
+                ResponseProductPage jsonResponse = JsonConvert.DeserializeObject<ResponseProductPage>(response.Content);
+                if (jsonResponse.status == "ok")
+                {
+                    return jsonResponse.data;
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.ErrorMessage}");
+                    return null;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Error: {response.ErrorMessage}");
+                return null;
+            }
+        }
+
+        public static async Task<ProductByPage> GetProductListCategoryByPage(int numberPage, int size, int category, string accessToken)
+        {
+            var request = new RestRequest("/product/getByCategoryId?page=" + numberPage + "&size=" + size + "&id=" + category);
+            request.AddHeader("Authorization", $"Bearer {accessToken}");
+            var response = await _client.ExecuteGetAsync(request);
+
+
+            if (response.IsSuccessful)
+            {
+                var jsonResponse = JsonConvert.DeserializeObject<ResponsePageCategory>(response.Content);
+                if (jsonResponse.Message == "Success")
+                {
+                    return jsonResponse.data;
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.ErrorMessage}");
+                    return null;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Error: {response.ErrorMessage}");
+                return null;
+            }
+        }
+
         public static async Task<Product> GetProductById(int productId, string accessToken)
         {
             var request = new RestRequest("/product/" + productId);
@@ -50,75 +105,76 @@ namespace MyShop.Services
             }
         }
 
-        //public static async Task<Product> AddProduct(Product product, string accessToken)
-        //{
-        //    try
-        //    {
-        //        // Tạo đối tượng JSON theo thông tin của sản phẩm
-        //        var jsonBody = new
-        //        {
-        //            // Id = product.Id,
-        //            name = product.Name,
-        //            price = product.Price,
-        //            category = product.Category.Id,
-        //            image = product.Image,
-        //            amount = product.Amount,
-        //            discount = product.Discount
-        //        };
+        public static async Task<Product> AddProductNoImageFile(Product product, string accessToken)
+        {
+            try
+            {
+                // Tạo đối tượng JSON theo thông tin của sản phẩm
+                var jsonBody = new
+                {
+                    // Id = product.Id,
+                    name = product.Name,
+                    price = product.Price,
+                    category = product.Category.Id,
+                    image = product.Image,
+                    amount = product.Amount,
+                    discount = product.Discount
+                };
 
-        //        // Tạo request mới
-        //        var request = new RestRequest("/product/add");
-        //        request.AddHeader("Content-Type", "application/json");
-        //        request.AddHeader("Authorization", $"Bearer {accessToken}");
-        //        request.AddJsonBody(jsonBody);
+                // Tạo request mới
+                var request = new RestRequest("/product/add");
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                request.AddJsonBody(jsonBody);
 
-        //        // Gửi yêu cầu POST
-        //        var response = await _client.ExecutePostAsync(request);
+                // Gửi yêu cầu POST
+                var response = await _client.ExecutePostAsync(request);
 
-        //        // Lấy nội dung từ phản hồi
-        //        string responseBody = response.Content;
-        //        Console.WriteLine(responseBody);
+                // Lấy nội dung từ phản hồi
+                string responseBody = response.Content;
+                Console.WriteLine(responseBody);
 
-        //        // Kiểm tra xem yêu cầu có thành công không
-        //        if (response.IsSuccessful)
-        //        {
-        //            // Xử lý kết quả nếu cần thiết
-        //            Respon1Data jsonResponse = JsonConvert.DeserializeObject<Respon1Data>(responseBody);
+                // Kiểm tra xem yêu cầu có thành công không
+                if (response.IsSuccessful)
+                {
+                    // Xử lý kết quả nếu cần thiết
+                    Respon1Data jsonResponse = JsonConvert.DeserializeObject<Respon1Data>(responseBody);
 
-        //            if (jsonResponse.Status == "ok")
-        //            {
-        //                Product newProduct = new Product
-        //                {
-        //                    Name = jsonResponse.Data.Name,
-        //                    Price = jsonResponse.Data.Price,
-        //                    Category = jsonResponse.Data.Category,
-        //                    Image = jsonResponse.Data.Image,
-        //                    Amount = jsonResponse.Data.Amount,
-        //                    Discount = jsonResponse.Data.Discount,
-
-        //                };
-        //                MessageBox.Show("Thêm sản phẩm thành công!");
-        //                return newProduct;
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show("Thêm sản phẩm thất bại!");
-        //                return null;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            // Xử lý lỗi nếu cần thiết
-        //            Console.WriteLine($"Error adding product: {response.ErrorMessage}");
-        //            return null;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error adding product: {ex.Message}");
-        //        return null;
-        //    }
-        //}
+                    if (jsonResponse.Status == "ok")
+                    {
+                        Product newProduct = new Product
+                        {
+                            Id = jsonResponse.Data.Id,
+                            Name = jsonResponse.Data.Name,
+                            Price = jsonResponse.Data.Price,
+                            Category = jsonResponse.Data.Category,
+                            Image = jsonResponse.Data.Image,
+                            Amount = jsonResponse.Data.Amount,
+                            Discount = jsonResponse.Data.Discount,
+                            Profit = jsonResponse.Data.Profit
+                        };
+                        //MessageBox.Show("Thêm sản phẩm thành công!");
+                        return newProduct;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thêm sản phẩm thất bại!");
+                        return null;
+                    }
+                }
+                else
+                {
+                    // Xử lý lỗi nếu cần thiết
+                    Console.WriteLine($"Error adding product: {response.ErrorMessage}");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding product: {ex.Message}");
+                return null;
+            }
+        }
         public static async Task<Product> AddProduct(Product product, string accessToken)
         {
             try

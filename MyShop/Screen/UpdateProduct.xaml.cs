@@ -17,12 +17,14 @@ namespace MyShop.Screen
     {
         private Product _product;
         private ListProduct _listProduct;
-        public UpdateProduct(ListProduct listProduct, Product product)
+        private int _currentPage;
+        public UpdateProduct(ListProduct listProduct, Product product, int currentPage)
         {
             InitializeComponent();
             _listProduct = listProduct;
             _product = product;
             DataContext = product;
+            _currentPage = currentPage;
         }
 
         public int categoryIndex { get; set; } = -1;
@@ -72,8 +74,15 @@ namespace MyShop.Screen
                 MessageBox.Show("Cập nhật sản phẩm thất bại!");
             }
 
-            _listProduct?.UpdateProductList();
+            //if (_listProduct != null)
+            //{
+            //    // Assuming you have methods to load products by page and category
+            //    await LoadProductListByPage(3);
+            //     await _listProduct.LoadProductListByCategory(categoryIndex);
+            //}
 
+            // _listProduct?.UpdateProductList();
+            await _listProduct.LoadProductListByPage(_currentPage);
             if (_productsType != null && _productsType.Count > 0)
             {
                 // Lấy ra đối tượng ProductType tương ứng với categoryIndex
@@ -82,20 +91,56 @@ namespace MyShop.Screen
                 // Set giá trị cho ComboBox
                 categoryCombobox.SelectedItem = selectedProductType;
             }
-
-            //categoryCombobox.SelectedItem = _productsType.FirstOrDefault(pt => pt.Id == categoryIndex);
-
-            //bool check = await ProductService.UpdateProduct(newProduct, token);
-            //if (check == true)
-            //{
-            //    MessageBox.Show("Cập nhật sản phẩm thành công!");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Cập nhật sản phẩm thất bại!");
-            //}
             this.Close();
         }
+
+
+        //int _totalPages;
+        //private int _currentPage;
+        //private int _pageSize;
+        //private async Task LoadProductListByPage(int page)
+        //{
+        //    // Lấy loại sản phẩm đang được chọn          
+        //    ProductType selectedProductType = _productsType.FirstOrDefault(pt => pt.Id == categoryIndex);
+        //    if (selectedProductType != null)
+        //    {
+        //        categoryIndex = selectedProductType.Id;
+
+        //        string token = "";
+        //        using (var reader = new StreamReader("data.json"))
+        //        {
+        //            // Đọc dữ liệu từ file
+        //            token = reader.ReadToEnd();
+        //        }
+
+        //        List<Product> productList;
+        //        // Gọi hàm mới để lấy danh sách sản phẩm theo loại và trang
+        //        ProductByPage productByPage;
+        //        if (categoryIndex == -1)
+        //        {
+
+        //            productByPage = await ProductService.GetProductListByPage(_currentPage, _pageSize, token);
+        //            productList = productByPage.Products;
+        //            _totalPages = productByPage.TotalPages;
+        //        }
+        //        else
+        //        {
+        //            // Gọi hàm mới để lấy danh sách sản phẩm theo loại và trang
+        //            productByPage = await ProductService.GetProductListCategoryByPage(page, _pageSize, categoryIndex, token);
+        //            productList = productByPage.Products;
+        //            _totalPages = productByPage.TotalPages;
+        //        }
+
+        //        // Hiển thị danh sách sản phẩm
+        //        //UpdateProductList(productList);
+        //        _products = new ObservableCollection<Product>(productList);
+
+        //        // Get the current data source
+        //        productsComboBox.ItemsSource = _products;
+        //        // Cập nhật phân trang
+        //        // UpdatePagination();
+        //    }
+        //}
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {

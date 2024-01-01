@@ -54,22 +54,25 @@ namespace MyShop.Services
                     {
                         // Xử lý lỗi nếu có
                         Console.WriteLine($"Error: {jsonResponse.Message}");
+                        return null;
                     }
                 }
                 else
                 {
                     // Xử lý lỗi nếu có
                     Console.WriteLine($"Error: {response.ErrorMessage}");
+                    return null;
                 }
             }
             catch (Exception ex)
             {
                 // Xử lý lỗi nếu có
                 Console.WriteLine($"Error: {ex.Message}");
+                return null;
             }
 
             // Trả về null nếu có lỗi
-            return null;
+            //return null;
         }
 
         public static async Task<ProductSold> GetStatisticSold(string type, string accessToken, DateTime? dateStart = null, DateTime? dateEnd = null)
@@ -118,22 +121,25 @@ namespace MyShop.Services
                     {
                         // Xử lý lỗi nếu có
                         Console.WriteLine($"Error: {jsonResponse.Message}");
+                        return null;
                     }
                 }
                 else
                 {
                     // Xử lý lỗi nếu có
                     Console.WriteLine($"Error: {response.ErrorMessage}");
+                    return null;
                 }
             }
             catch (Exception ex)
             {
                 // Xử lý lỗi nếu có
                 Console.WriteLine($"Error: {ex.Message}");
+                return null;
             }
 
             // Trả về null nếu có lỗi
-            return null;
+
         }
     }
 }

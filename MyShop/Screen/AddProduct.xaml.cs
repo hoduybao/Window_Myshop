@@ -12,15 +12,17 @@ namespace MyShop.Screen
     /// Interaction logic for AddProduct.xaml
     /// </summary>
 
+
     public partial class AddProduct : Window
     {
         ObservableCollection<Product> _products;
-
+        private int _currentPage;
         ListProduct _listProduct;// Thêm biến để lưu tham chiếu đến ListProduct                                
-        public AddProduct(ListProduct listProduct)
+        public AddProduct(ListProduct listProduct, int curentPage)
         {
             InitializeComponent();
             _listProduct = listProduct;
+            _currentPage = curentPage;
         }
 
         public int categoryIndex { get; set; } = -1;
@@ -90,7 +92,8 @@ namespace MyShop.Screen
 
             Product result = await ProductService.AddProduct(newProduct, token);
             // _products.Add(result);
-            _listProduct.UpdateProductList(await ProductService.GetProductList());
+            await _listProduct.LoadProductListByPage(_currentPage);
+            // _listProduct.UpdateProductList(await ProductService.GetProductList());
             this.Close();
         }
 

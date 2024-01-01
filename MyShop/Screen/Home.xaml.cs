@@ -40,9 +40,9 @@ namespace MyShop.Screen
                 var product = button.DataContext as ProductOfOrder;
                 if (product != null)
                 {
-                    if (product.Amount < Product_amount) // Kiểm tra số lượng sản phẩm đã đặt hàng có nhỏ hơn số lượng hiện có không
+                    if (product.Quantity < Product_amount) // Kiểm tra số lượng sản phẩm đã đặt hàng có nhỏ hơn số lượng hiện có không
                     {
-                        product.Amount++;
+                        product.Quantity++;
 
                         UpdateProductListAmount(product.Id, 1);
 
@@ -65,9 +65,9 @@ namespace MyShop.Screen
             if (button != null)
             {
                 var product = button.DataContext as ProductOfOrder;
-                if (product != null && product.Amount > 0)
+                if (product != null && product.Quantity > 0)
                 {
-                    product.Amount--;
+                    product.Quantity--;
 
                     UpdateProductListAmount(product.Id, -1);
 
@@ -237,9 +237,9 @@ namespace MyShop.Screen
                     STT = productList.Count + 1,
                     Id = selectedProduct.Id,
                     Product = product,
-                    Price = (decimal)selectedProduct.Price * (decimal)(1 - selectedProduct.Discount / 100),
-                    Amount = 1, // Số lượng mặc định là 1
-                                //TongTien = selectedProduct.Price, // Tổng tiền ban đầu bằng giá của sản phẩm
+                    Price = selectedProduct.Price * (1 - selectedProduct.Discount / 100),
+                    Quantity = 1, // Số lượng mặc định là 1
+                                  //TongTien = selectedProduct.Price, // Tổng tiền ban đầu bằng giá của sản phẩm
                 };
 
 
@@ -324,7 +324,7 @@ namespace MyShop.Screen
             string phone = phoneCustomer.Text;
             Client client = new Client()
             {
-                CustomerName = name,
+                Name = name,
                 Email = "example@gmail.com",
                 PhoneNumber = phone,
                 Address = "TP HCM"
@@ -361,7 +361,7 @@ namespace MyShop.Screen
 
                     foreach (var product in productList)
                     {
-                        await OrderService.UpdateProductAmount(product.Id, Product_amount - product.Amount, token);
+                        await OrderService.UpdateProductAmount(product.Id, Product_amount - product.Quantity, token);
                     }
                     // Xử lý khi thêm đơn hàng thành công, có thể hiển thị thông báo, làm sạch danh sách hóa đơn, ...
                     MessageBox.Show("Đã thanh toán thành công!");
@@ -403,7 +403,7 @@ namespace MyShop.Screen
                 if (productToUpdate != null)
                 {
                     // Cập nhật số lượng sản phẩm bằng cách trừ đi số lượng đã bán
-                    productToUpdate.Amount -= productInOrder.Amount;
+                    productToUpdate.Amount -= productInOrder.Quantity;
 
                     // Đảm bảo số lượng không bao giờ dưới 0
                     if (productToUpdate.Amount < 0)
@@ -423,7 +423,7 @@ namespace MyShop.Screen
             {
                 Phone = phoneCustomer.Text,
                 ProductIds = productList.Select(item => item.Id).ToList(),
-                Quantities = productList.Select(item => item.Amount).ToList(),
+                Quantities = productList.Select(item => item.Quantity).ToList(),
                 Prices = productList.Select(item => (double)item.Price).ToList()
             };
 

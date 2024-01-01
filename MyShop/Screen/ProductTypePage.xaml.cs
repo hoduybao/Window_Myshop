@@ -92,9 +92,49 @@ namespace MyShop.Screen
             }
         }
 
+        private string selectedPath;
         private void BtnImportProductType_Click(object sender, RoutedEventArgs e)
         {
+            //try
+            //{
+            //    OpenFileDialog openFileDialog = new OpenFileDialog
+            //    {
+            //        Filter = "Excel files (*.xlsx;*.xls)|*.xlsx;*.xls|All files (*.*)|*.*",
+            //        Title = "Chọn file Excel"
+            //    };
 
+            //    if (openFileDialog.ShowDialog() == true)
+            //    {
+            //        // Lưu trữ đường dẫn của hình ảnh được chọn
+            //        selectedPath = openFileDialog.FileName;
+
+
+            //        // Gọi hàm ImportProductsFromExcel với đường dẫn file Excel và accessToken (bạn cần thay thế accessToken thực tế)
+            //        string token = "";
+            //        using (var reader = new StreamReader("data.json"))
+            //        {
+            //            // Đọc dữ liệu từ file
+            //            token = reader.ReadToEnd();
+            //        }
+            //        var importResult = BackupService.ImportProductTypeFromExcel(selectedPath, token);
+
+            //        if (importResult != null)
+            //        {
+            //            //_products.UpdateProductList(await ProductService.GetProductList());
+            //            // _products = new ObservableCollection<Product>(await ProductService.GetProductList());
+            //            //UpdateProductList(await ProductService.GetProductList());
+            //            MessageBox.Show("Nhập loại sản phẩm từ Excel thành công!");
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Lỗi khi loại nhập sản phẩm từ Excel.");
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Lỗi: {ex.Message}");
+            //}
         }
 
         private void ListProductType_SelectionChanged(object sender, SelectionChangedEventArgs e)

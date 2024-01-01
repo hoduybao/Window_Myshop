@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MyShop.Screen"
       xmlns:super="clr-namespace:MyShop.Helpers"
-
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="950"
       Title="ListProduct">
@@ -69,14 +68,54 @@
                 <TextBlock Height="25" TextAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="14" >Danh sách sản phẩm</TextBlock>
             </Border>
 
-            <StackPanel Orientation="Horizontal" Margin="20,10,0,0">
+            <!--<StackPanel Orientation="Horizontal" Margin="20,10,0,0">
                 <Button  Width="90" Content="Import" FontWeight="Bold" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="ForestGreen" FontFamily="Sitka Subheading" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnImportProduct_Click" Name="btnImportProduct"></Button>
-                <Button Content="Previous Page" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="PreviousPage_Click" />
-                <Button Content="Next Page" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="NextPage_Click" />
-            </StackPanel>
+                <Button Content="Previous Page" Width="125" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="PreviousPage_Click" />
+                <ComboBox Name="pagingComboBox" Width="200" Height="35" SelectionChanged="pagingComboBox_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                <Run Text="{Binding Page, Mode=OneTime}"/>/<Run Text="{Binding Total, Mode=OneTime}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Content="Next Page" Width="125" Click="NextPage_Click" />
+            </StackPanel>-->
+            <Grid Margin="20,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="400" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="170" />
+                </Grid.ColumnDefinitions>
 
-        
-            
+                <Button Grid.Column="0" Width="90" Content="Import" FontWeight="Bold" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Background="ForestGreen" FontFamily="Sitka Subheading" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnImportProduct_Click" Name="btnImportProduct"></Button>
+                <Button Grid.Column="1" Margin="30,0,0,0" Width="90" Content="Export" FontWeight="Bold" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Background="ForestGreen" FontFamily="Sitka Subheading" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnExportProduct_Click" Name="btnExmportProduct"></Button>
+                <!--<TextBlock Grid.Column ="2" FontSize="15" Text="SL: " Width="40" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Sitka Subheading" ></TextBlock>-->
+                <StackPanel Margin ="120,0,0,0" Grid.Column="2" Orientation="Horizontal" >
+                    <Label  FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" >Size/Page:</Label>
+                    <!--<TextBlock x:Name="NumberProduct" Text="{Binding _pageSize}" VerticalAlignment="Center" Width="50" Height="25" FontSize="13"/>-->
+                    <TextBox x:Name="NumberProduct"  Width="40" Height="30" FontSize="13" BorderThickness="1,1,1,1" LostFocus="NumberProduct_LostFocus"  />
+                    <!--<TextBox x:Name="NumberProduct" Width="40" Height="30" FontSize="13" BorderThickness="1,1,1,1" />-->
+                </StackPanel>
+                <Button Grid.Column="2" Content="Previous Page" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center" Click="PreviousPage_Click" />
+
+                <ComboBox Grid.Column="3" Name="pagingComboBox" Width="50" Height="35" VerticalAlignment="Center" Margin="0,5,0,5" SelectionChanged="pagingComboBox_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                    <Run Text="{Binding Page, Mode=OneTime}"/>/<Run Text="{Binding Total, Mode=OneTime}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Button Grid.Column="4" HorizontalAlignment="Left" Content="Next Page" Width="120" Click="NextPage_Click" />
+            </Grid>
+
+
             <ListView ItemsSource="{Binding Source={StaticResource ProductCollectionViewSource}}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="productsComboBox" Margin="10" Height="435"  VerticalAlignment="Top" SelectionChanged="productsComboBox_SelectionChanged">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>

@@ -39,23 +39,23 @@
             </StackPanel>
             <Border Margin="20,15,20,0" BorderBrush="Black" BorderThickness="1">
 
-                    <DataGrid Height="500" FontSize="15" x:Name="dsHoaDon" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionChanged="dgHoaDon_SelectionChanged">
-                       
-                        <DataGrid.Columns>
-                        <DataGridTextColumn Header="STT"  Binding="{Binding STT}" >
-                           
+                <DataGrid Height="500" FontSize="15" x:Name="dsHoaDon" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionChanged="dgHoaDon_SelectionChanged">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID"  Binding="{Binding Id}" >
+
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Tên khách hàng" Width="220"  Binding="{Binding Client.CustomerName}" >
-                            
+                        <DataGridTextColumn Header="Tên khách hàng" Width="220"  Binding="{Binding Client.Name}" >
+
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Số điện thoại" Width="150"  Binding="{Binding Client.PhoneNumber}" >
-                          
+
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Tổng tiền" Width="150" Binding="{Binding Total}" >
-                           
+
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Ngày đặt hàng" Width="200"  Binding="{Binding OrderDate}" >
-                           
+
                         </DataGridTextColumn>
                         <DataGridTemplateColumn Header="Khác" >
                             <DataGridTemplateColumn.CellTemplate>
@@ -76,10 +76,10 @@
                         </DataGridTemplateColumn>
 
                     </DataGrid.Columns>
-                    </DataGrid>
+                </DataGrid>
             </Border>
             <StackPanel Orientation="Horizontal" Margin="20,10,0,0">
-            
+
                 <Button Grid.Column="1" Grid.Row="2"
                 Width="90" Content="Xóa"
                 FontWeight="Bold"
@@ -95,7 +95,22 @@
                 Click="btnDeleteOrder_Click"
                 Name="btnDeleteOrder">
                 </Button>
-              
+
+                <StackPanel Margin ="120,0,0,0" Grid.Column="2" Orientation="Horizontal" >
+                    <Label  FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" >Size/Page:</Label>
+                    <TextBox x:Name="NumberProduct" Width="40" Height="25" FontSize="13" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  LostFocus="NumberProduct_LostFocus" />
+                </StackPanel>
+
+                <Button Margin ="30,0,0,0" Content="Previous" Width="85" HorizontalAlignment="Right" VerticalAlignment="Center" Click="PreviousPage_Click" />           
+                <ComboBox Margin ="20,0,20,0" Name="pagingComboBox" Width="50" Height="35" VerticalAlignment="Center" SelectionChanged="pagingComboBox_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock><Run Text="{Binding Page, Mode=OneTime}"/>/<Run Text="{Binding Total, Mode=OneTime}"/></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button HorizontalAlignment="Left" Content="Next" Width="85" Click="NextPage_Click" />
+
             </StackPanel>
         </StackPanel>
     </Border>
