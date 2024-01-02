@@ -236,15 +236,18 @@
     </ApplicationDefinition>
     <Compile Include="Configs\Constant.cs" />
     <Compile Include="Configs\RestSharpClient.cs" />
+    <Compile Include="Helpers\ResponseClient.cs" />
     <Compile Include="Helpers\percentConverter.cs" />
     <Compile Include="Helpers\ReflectionExtension.cs" />
     <Compile Include="Helpers\Respon1Data.cs" />
     <Compile Include="Helpers\Respon1ProductType.cs" />
     <Compile Include="Helpers\Response1Order.cs" />
+    <Compile Include="Helpers\ResponseClientUpdate.cs" />
     <Compile Include="Helpers\ResponseData.cs" />
     <Compile Include="Helpers\Response.cs" />
     <Compile Include="Helpers\indexConverter.cs" />
     <Compile Include="Helpers\numberToMoneyConverter.cs" />
+    <Compile Include="Helpers\ResponseListCustomer.cs" />
     <Compile Include="Helpers\ResponseListOrder.cs" />
     <Compile Include="Helpers\ResponseListOrderSearchcs.cs" />
     <Compile Include="Helpers\ResponsePageCategory.cs" />
@@ -268,6 +271,9 @@
     <Compile Include="Screen\AddProductType.xaml.cs">
       <DependentUpon>AddProductType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screen\Customer.xaml.cs">
+      <DependentUpon>Customer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screen\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
@@ -286,6 +292,9 @@
     <Compile Include="Screen\ProductTypePage.xaml.cs">
       <DependentUpon>ProductTypePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screen\UpdateClient.xaml.cs">
+      <DependentUpon>UpdateClient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screen\UpdateProduct.xaml.cs">
       <DependentUpon>UpdateProduct.xaml</DependentUpon>
     </Compile>
@@ -294,6 +303,7 @@
     </Compile>
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\BackupService.cs" />
+    <Compile Include="Services\ClientService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductTypeService.cs" />
     <Compile Include="Services\ProductService.cs" />
@@ -318,6 +328,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Screen\Customer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Screen\Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -339,6 +353,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screen\ProductTypePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screen\UpdateClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -466,6 +484,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\HomePage\icon_order.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HomePage\icon_customer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HomePage\icon_client.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

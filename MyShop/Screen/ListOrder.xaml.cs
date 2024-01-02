@@ -35,6 +35,32 @@ namespace MyShop.Screen
         {
             await LoadOrderListByPage(_currentPage);
         }
+
+        public async Task LoadOrderListByPage(int page)
+        {
+            string token = "";
+            using (var reader = new StreamReader("data.json"))
+            {
+                // Đọc dữ liệu từ file
+                token = reader.ReadToEnd();
+            }
+
+            List<Order> orderList;
+            // Gọi hàm mới để lấy danh sách sản phẩm theo loại và trang
+            OrderResponse orderResponse;
+            orderResponse = await OrderService.GetOrderListByPage(_currentPage, _pageSize, token);
+            orderList = orderResponse.Orders;
+            _totalPages = orderResponse.TotalPages;
+
+            // Hiển thị danh sách sản phẩm
+            _orderList = new List<Order>(orderList);
+            // Get the current data source
+            dsHoaDon.ItemsSource = _orderList;
+            dsHoaDon.Items.Refresh();
+            //moi them
+            UpdatePagination();
+        }
+
         private void btnViewDetailOrder_Click(object sender, RoutedEventArgs e)
         {
 
@@ -161,30 +187,7 @@ namespace MyShop.Screen
             }
         }
 
-        public async Task LoadOrderListByPage(int page)
-        {
-            string token = "";
-            using (var reader = new StreamReader("data.json"))
-            {
-                // Đọc dữ liệu từ file
-                token = reader.ReadToEnd();
-            }
 
-            List<Order> orderList;
-            // Gọi hàm mới để lấy danh sách sản phẩm theo loại và trang
-            OrderResponse orderResponse;
-            orderResponse = await OrderService.GetOrderListByPage(_currentPage, _pageSize, token);
-            orderList = orderResponse.Orders;
-            _totalPages = orderResponse.TotalPages;
-
-            // Hiển thị danh sách sản phẩm
-            _orderList = new List<Order>(orderList);
-            // Get the current data source
-            dsHoaDon.ItemsSource = _orderList;
-            dsHoaDon.Items.Refresh();
-            //moi them
-            UpdatePagination();
-        }
         private async void PreviousPage_Click(object sender, RoutedEventArgs e)
         {
             if (_currentPage > 1)

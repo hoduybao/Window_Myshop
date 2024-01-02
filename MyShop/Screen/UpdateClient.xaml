@@ -1,0 +1,28 @@
+﻿<Window x:Class="MyShop.Screen.UpdateClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyShop.Screen"
+        mc:Ignorable="d"
+        Title="UpdateClient" Height="600" Width="450">
+    <Canvas Margin="0,0,0,6">
+        <TextBlock TextAlignment="Center" Foreground="#FFFC1313" FontWeight="Bold" FontSize="25" Canvas.Left="111" Canvas.Top="45" >Cập nhật khách hàng</TextBlock>
+        <TextBlock FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" Canvas.Left="87" Canvas.Top="115" RenderTransformOrigin="0.478,-0.358" HorizontalAlignment="Center" VerticalAlignment="Top">Tên khách hàng:</TextBlock>
+        <TextBox BorderBrush="Purple" Height="40" Width="300" Text="{Binding Name}" x:Name="NameBox" FontSize="13" Padding="5,2,2,0" BorderThickness="1,1,1,1" Canvas.Left="87" Canvas.Top="138" VerticalAlignment="Top" HorizontalAlignment="Center" />
+
+        <TextBlock FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" Height="18" VerticalAlignment="Top" RenderTransformOrigin="0.465,-0.142" Canvas.Left="90" Canvas.Top="214" >Địa chỉ:</TextBlock>
+        <TextBox BorderBrush="Purple" Padding="5,2,2,0" BorderThickness="1,1,1,1" Text="{Binding Address}" x:Name="AddressBox" Canvas.Left="87" Canvas.Top="237" HorizontalAlignment="Center" Height="40" Width="300" VerticalAlignment="Top"/>
+
+        <TextBlock FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14"  RenderTransformOrigin="0.622,-0.578" Canvas.Left="90" Canvas.Top="315" HorizontalAlignment="Left" VerticalAlignment="Top">Số điện thoại:</TextBlock>
+        <TextBox BorderBrush="Purple" Padding="5,2,2,0" BorderThickness="1,1,1,1" Text="{Binding PhoneNumber}" x:Name="PhoneNumberBox" Canvas.Left="90" Canvas.Top="338" Height="40" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <TextBlock FontFamily="Sitka Subheading" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.622,-0.578" Canvas.Left="90" Canvas.Top="420" >Email:</TextBlock>
+        <TextBox BorderBrush="Purple" Padding="5,2,2,0" BorderThickness="1,1,1,1" Text="{Binding Email}" x:Name="EmailBox" Canvas.Left="90" Canvas.Top="443" Height="40" Width="297" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Left" Canvas.Left="97" Canvas.Top="512" VerticalAlignment="Top">
+            <Button x:Name="cancelButton" Click="cancelButton_Click" Content="Cancel" Width="120" Margin="0 0 20 0"/>
+            <Button x:Name="updateButton" Click="updateButton_Click" Content="Update" Width="120" Margin="20 0 0 0"/>
+        </StackPanel>
+    </Canvas>
+</Window>

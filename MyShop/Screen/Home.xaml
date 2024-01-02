@@ -40,14 +40,14 @@
                             <DataGrid x:Name="dgHoaDon" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionChanged="dgHoaDon_SelectionChanged">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="STT" Width="60" Binding="{Binding STT}" />
-                                    <DataGridTextColumn Header="Tên sản phẩm" Width="160" Binding="{Binding Product.Name}" />
-                                    <DataGridTextColumn Header="Đơn giá" Width="90" Binding="{Binding Price}" />
+                                    <DataGridTextColumn Header="Tên sản phẩm" Width="120" Binding="{Binding Product.Name}" />
+                                    <DataGridTextColumn Header="Đơn giá" Width="110" Binding="{Binding Price}" />
                                     <DataGridTemplateColumn Header="Số lượng">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
                                                     <Button Width="20" Foreground="Black" Padding="0" Background="LightGray" Height="20" Click="DecreaseQuantity_Click">-</Button>
-                                                    <TextBlock Margin="5,0,5,0" Text="{Binding Amount}" />
+                                                    <TextBlock Margin="5,0,5,0" Text="{Binding Quantity}" />
                                                     <Button Width="20" Padding="0" Foreground="Black" Background="LightGray" Height="20" Content="+" Click="IncreaseQuantity_Click"/>
                                                 </StackPanel>
                                             </DataTemplate>

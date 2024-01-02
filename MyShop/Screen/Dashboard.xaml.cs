@@ -77,7 +77,11 @@ namespace MyShop.Screen
         private void go_order(object sender, MouseButtonEventArgs e)
         {
             _mainFrame.Navigate(new ListOrder());
+        }
 
+        private void go_customer(object sender, MouseButtonEventArgs e)
+        {
+            _mainFrame.Navigate(new Customer());
         }
     }
 }

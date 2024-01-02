@@ -122,6 +122,13 @@ ResizeMode="NoResize"
                             <TextBlock Text="Đơn hàng" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
                         </StackPanel>
                     </ListBoxItem>
+
+                    <ListBoxItem  MouseLeftButtonUp="go_customer">
+                        <StackPanel Orientation="Horizontal" Margin="10,10,0,10"  >
+                            <Image Source="../Images/HomePage/icon_client.jpg" Width="25" Height="25" Margin="5,0,10,0" StretchDirection="Both" Stretch="Uniform" Cursor=""/>
+                            <TextBlock Text="Khách hàng" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </ListBoxItem>
                 </ListBox>
             </Border>
 
