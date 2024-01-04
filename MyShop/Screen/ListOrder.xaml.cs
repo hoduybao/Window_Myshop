@@ -63,7 +63,8 @@ namespace MyShop.Screen
 
         private void btnViewDetailOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            var page = new DetailOrder();
+            NavigationService.Navigate(page);
         }
 
         private async void btnApplyFindOrder_Click(object sender, RoutedEventArgs e)
